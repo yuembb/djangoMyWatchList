@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block css %}
+    <style>
+        .den{
+            box-shadow: rgba(131, 131, 131, 0.116) 0px 8px 24px;
+            border-radius: 10px;
+            padding: 10px;
+        }
+    </style>
+{% endblock css %}
+    
+
+{% block main %}
+
+<main class="mt-4">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h2>Ürün Ekle</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Name input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="form4Example1" class="form-control" name="title" />
+                    <label class="form-label" for="form4Example1">Adı</label>
+                </div>
+
+                <!-- Marka input -->
+
+                <div class="form-outline mb-4">
+
+
+                    <label class="form-label" for="form4Example2">Kategori</label>
+                    <select name="category" id="category" class="form-select">
+                        {% for i in categorys %}
+                        <option value="{{ i.title }}">
+                            {{ i.title }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <label class="form-label" for="form4Example2">Tür</label>
+                    
+
+                                       
+
+
+
+                        
+                    <select name="type" id="type" class="form-select">
+                        {% for i in types %}
+                        <option value="{{ i.title }}">
+                            {{ i.title }}
+                        </option>
+                        {% endfor %}
+                    </select>
+
+
+
+
+                    <div class="my-3 den ">
+                        <label for="formFile" class="form-label">Resim Ekle</label>
+                        <input class="form-control " name="image" type="file" id="formFile">
+                    </div>
+
+                </div>
+
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                    <textarea class="form-control" id="form4Example3" name="text" rows="4"></textarea>
+                    <label class="form-label" for="form4Example3">Konusu</label>
+                </div>
+
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-success btn-block mb-4">Ekle</button>
+            </form>
+        </div>
+    </div>
+
+
+</main>
+{% endblock main %}
+
+
+ 
+{% block js %}
+<script>
+
+    // Seçenek değiştiğinde tetiklenecek olay dinleyicisi
+    document.getElementById('category').addEventListener('change', function() {
+    var selectedOption = this.options[this.selectedIndex].value;
+    
+    // Burada işlemler yapılır
+    console.log('Seçilen kategori:', selectedOption);
+
+});
+
+
+
+</script>
+{% endblock js %}
+
+
+

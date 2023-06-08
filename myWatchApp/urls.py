@@ -1,0 +1,39 @@
+"""
+URL configuration for myWatchApp project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from appMy.views import *
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', index ,name='index'),
+    path('detail/<pid>/', detailPage ,name='detailPage'),
+    path('category/<ptitle>/', categoryPage ,name='categoryPage'),
+    path('category/<ptitle>/<group>/', categoryPage ,name='categoryPage2'),
+    path('card-add/', cardAddPage ,name='card-add'),
+    path('card-delete/<id>/', cardDeletePage ,name='cardDeletePage'),
+    #* USER
+    path('login/', loginUser , name='loginUser'),
+    path('register/', registerUser , name='registerUser'),
+    path('logout/', logoutUser , name='logoutUser'),
+    path('profile/', profileUser , name='profileUser'), 
+
+    
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

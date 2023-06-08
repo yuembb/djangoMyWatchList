@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block css %}
+    <style>
+        .card_count{
+            margin-left: 80%;
+        }
+        .my_button{
+            background-color: #7639bd;
+        }
+        .my_button:hover{
+            background-color: #945ed3 !important;
+        }
+
+        .my_list:hover{
+            background-color: #7639bd !important;
+        }
+        .list-group-item.active{
+            background-color: #7639bd !important;
+        }
+    </style>
+{% endblock css %}
+
+{% block main %}
+
+<main>
+
+
+    <div class="card_count">
+        <a class="btn" href="/category/{{ category_active }}/12/"><img src="{% static 'image/1.png' %}" alt=""></a>
+        <a class="btn" href="/category/{{ category_active }}/6/"><img src="{% static 'image/2.png' %}" alt=""></a>
+        <a class="btn" href="/category/{{ category_active }}/4/"><img src="{% static 'image/3.png' %}" alt=""></a>
+        <a class="btn" href="/category/{{ category_active }}/3/"><img src="{% static 'image/4.png' %}" alt=""></a>
+        <a class="btn" href="/category/{{ category_active }}/2/"><img src="{% static 'image/6.png' %}" alt=""></a>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col row my-3">
+                {% for i in cards %}
+                <div class="col-md-{{ group }} mb-3">
+                    <div class="card">
+                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                            <img src="{{ i.image.url }}" class="img-fluid" />
+                            <a href="{% url 'detailPage' i.id  %}">
+
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ i.title }}</h5>
+                            <p class="card-text">{{ i.text|truncatechars:50 }}</p>
+                            <p class="card-text">{{ i.date_now }}</p>
+    
+                            <a href="#!" class="btn my_button">Button</a>
+                        </div>
+                    </div>
+                </div>
+    
+                {% endfor %}
+            </div>
+            
+
+            <!--* Catagory Start -->
+            <div class="col-3 row my-3">
+
+                <div class="list-group list-group-light">
+                    <h2>Katagori
+                        <hr>
+                    </h2>
+
+                    {% for i in category %}
+                    <a href="/category/{{ i.title }}"
+                        class="my_list list-group-item list-group-item-action px-3 border-0 mb-2 {% if category_active == i.title %} active {% endif %}"
+                        aria-current="true">
+                        {{ i.title }}</a>
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+            <!--* Catagory End -->
+
+
+
+        </div>
+    </div>
+
+
+
+</main>
+
+{% endblock main %}

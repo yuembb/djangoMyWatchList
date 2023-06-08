@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<style>
+    .card_count {
+        margin-left: 80%;
+    }
+
+    .my_button {
+        background-color: #7639bd;
+    }
+
+    .my_button:hover {
+        background-color: #945ed3 !important;
+    }
+
+    .my_button_del {
+        background-color: crimson;
+    }
+
+    .my_button_del:hover {
+        background-color: darkred !important;
+    }
+
+    .my_list:hover {
+        background-color: #945ed3 !important;
+    }
+</style>
+{% endblock css %}
+
+
+{% block main %}
+
+<main>
+
+ 
+
+
+    <!-- 
+    <div class="card_count">
+        <a class="btn" href="/-/12/"><img src="{% static 'image/1.png' %}" alt=""></a>
+        <a class="btn" href="/-/6/"><img src="{% static 'image/2.png' %}" alt=""></a>
+        <a class="btn" href="/-/4/"><img src="{% static 'image/3.png' %}" alt=""></a>
+        <a class="btn" href="/-/3/"><img src="{% static 'image/4.png' %}" alt=""></a>
+        <a class="btn" href="/-/2/"><img src="{% static 'image/6.png' %}" alt=""></a>
+    </div> -->
+
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col row my-3">
+                {% for i in cards %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                            <img src="{{ i.image.url }}" class="img-fluid w-100 h-auto"
+                                style="object-fit: contain !important; " />
+                            <a href="{% url 'detailPage' i.id  %}">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ i.title }}</h5>
+                            <p class="card-text">{{ i.text|truncatechars:50 }}</p>
+                            <p class="card-text">{{ i.date_now }}</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'detailPage' i.id %}" class="btn my_button">Detay</a>
+
+                                {% if request.user.is_authenticated %}
+
+
+
+                                <a href="{% url 'cardDeletePage' i.id %}" class="btn my_button_del">Sil</a>
+
+                                
+                                <!-- Button trigger modal -->
+
+                                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                    Sil
+                                </button> -->
+
+                                <!-- Button trigger modal End -->
+
+
+                                <!-- Modal -->
+<!-- 
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Bir Ürün Silmek Üzeresiniz</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form method="POST" enctype="multipart/form-data">
+                                                <div class="modal-body">
+                                                    {% csrf_token %}
+                                                    Silmek istediğinize emin misiniz ?
+                                                    <input type="hidden" name="cardid" value="{{ i.id }}">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                                                    <button type="submit" name="submit" value="cardDelete" class="btn btn-primary">Sil</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <!-- Modal End -->
+
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+
+
+            <!--* Catagory Start -->
+            <div class="col-3 row my-3">
+
+                <div class="list-group list-group-light">
+                    <h2>Katagori
+                        <hr>
+                    </h2>
+
+                    {% for i in category %}
+                    <a href="/category/{{ i.title }}"
+                        class="my_list list-group-item list-group-item-action px-3 border-0 mb-2 {% if category_active == i.title %} active {% endif %}"
+                        aria-current="true">
+                        {{ i.title }}</a>
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+            <!--* Catagory End -->
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+</main>
+
+{% endblock main %}
