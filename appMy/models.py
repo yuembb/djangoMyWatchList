@@ -90,7 +90,7 @@ class Profile(models.Model):
    
    def save(self, *args, **kwargs):
 
-      self.slug = slugify(self.name)
+      self.slug = slugify(self.user.first_name)
       self.tel = self.tel[:10]
       self.job = self.job[:40]
       self.address = self.address[:100]
