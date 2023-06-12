@@ -64,10 +64,10 @@
                             <img src="{{ profile.image.url }}" class="rounded-circle mb-2" style="object-fit: cover;"
                                 height="40" width="40" alt="Black and White Portrait of a Man" loading="lazy" />
 
-                            {% else %}
+                            {% comment %} {% else %}
                             <img src="{% static 'image/profile.png' %}" class="rounded-circle mb-2"
                                 style="object-fit: cover;" height="40" width="40"
-                                alt="Black and White Portrait of a Man" loading="lazy" />
+                                alt="Black and White Portrait of a Man" loading="lazy" /> {% endcomment %}
 
                             {% endif %}
 

@@ -43,6 +43,9 @@ def categoryPage(request , ptitle , group=4):
 
     category = Category.objects.all()
     
+    
+    #  user=request.user     bunu kullanıcaz
+    
     if ptitle == "all" and request.user.is_authenticated:
         cards = Card.objects.filter(user=request.user)
     else:
@@ -200,7 +203,8 @@ def registerUser(request):
                         user = User.objects.create_user(first_name = fname , last_name = lname , username = username , email = email , password = password1)
                         user.save()
                         
-                        profile = Profile(user=user , password= password1)
+                        image = "/profile/profile.png"
+                        profile = Profile(user=user , password= password1 , image = image )
                         profile.save()
                         
                         return redirect("loginUser")
