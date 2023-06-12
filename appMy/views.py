@@ -46,7 +46,7 @@ def categoryPage(request , ptitle , group=4):
     if ptitle == "all" and request.user.is_authenticated:
         cards = Card.objects.filter(user=request.user)
     else:
-        cards = Card.objects.filter(category__title=ptitle , user=request.user)
+        cards = Card.objects.filter(category__title=ptitle)
 
     context = {
         "cards":cards,
